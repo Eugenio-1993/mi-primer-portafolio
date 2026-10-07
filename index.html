@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eugenio Morales Carrizo | Arquitecto de software en formación</title>
+  <meta name="description" content="Portafolio de Eugenio Enrique Morales Carrizo, estudiante de desarrollo de software en Colombia: creador de BiblioLend, participante del Semillero Quipux y futuro arquitecto de software.">
+  <meta name="author" content="Eugenio Enrique Morales Carrizo">
+  <meta name="theme-color" content="#1b1d21">
+  <meta name="color-scheme" content="dark">
+
+  <!-- SEO: la dirección real del sitio -->
+  <link rel="canonical" href="https://eugenio-morales.netlify.app/">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, LinkedIn, Facebook, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Eugenio Morales Carrizo">
+  <meta property="og:title" content="Eugenio Morales Carrizo | Arquitecto de software en formación">
+  <meta property="og:description" content="Estudiante de desarrollo de software, creador de BiblioLend y participante del Semillero Quipux.">
+  <meta property="og:url" content="https://eugenio-morales.netlify.app/">
+  <meta property="og:image" content="https://eugenio-morales.netlify.app/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Eugenio Enrique Morales Carrizo, futuro arquitecto de software">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Datos estructurados: le explican a Google, en su idioma, quién es la persona de esta página -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eugenio Enrique Morales Carrizo",
+    "givenName": "Eugenio Enrique",
+    "familyName": "Morales Carrizo",
+    "jobTitle": "Estudiante de desarrollo de software",
+    "description": "Estudiante de la media técnica en desarrollo de software, creador de BiblioLend y participante del Semillero Quipux.",
+    "url": "https://eugenio-morales.netlify.app/",
+    "image": "https://eugenio-morales.netlify.app/assets/foto-eugenio.jpg",
+    "email": "mailto:moralescarrizoe@gmail.com",
+    "nationality": { "@type": "Country", "name": "Colombia" },
+    "alumniOf": { "@type": "EducationalOrganization", "name": "I.E República de Honduras" },
+    "knowsAbout": ["HTML5", "CSS", "JavaScript", "Java", "Python", "Git", "GitHub", "Netlify"],
+    "knowsLanguage": ["es", "en"],
+    "sameAs": [
+      "https://github.com/Eugenio-1993",
+      "https://www.linkedin.com/in/eugenio-morales-carrizo-14b629368/",
+      "https://www.tiktok.com/@eugenio_moral",
+      "https://x.com/EugenioC1993",
+      "https://www.instagram.com/eu_moral/"
+    ]
+  }
+  </script>
+
+  <!-- Las tipografías están dentro de assets/fonts y se declaran en css/styles.css: la página se ve igual con o sin internet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/accesibilidad.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Fondo: partículas suspendidas que el cursor atrae como un campo magnético (js/main.js, bloque 8) -->
+  <canvas class="bg" id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Marca reutilizable: un rombo con una M dentro. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="marca" viewBox="0 0 64 64">
+      <path d="M32 3 61 32 32 61 3 32Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <path d="M19 42V23l13 12 13-12v19" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+    </symbol>
+    <symbol id="ico-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="ico-cap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.2V16c0 1.2 2.7 2.8 6 2.8s6-1.6 6-2.8v-4.8"/><path d="M22 9v5"/></g></symbol>
+    <symbol id="ico-code" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13.5 5l-3 14"/></g></symbol>
+    <symbol id="ico-seed" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12C12 8 9 6 5 6c0 4 2 6 7 6z"/><path d="M12 14c0-3 2.2-5 6-5 0 3.2-1.8 5-6 5z"/></g></symbol>
+    <symbol id="ico-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></g></symbol>
+    <symbol id="ico-laptop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="5" width="15" height="10.5" rx="1.6"/><path d="M2.5 19h19"/></g></symbol>
+    <symbol id="ico-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.6h2"/></g></symbol>
+    <symbol id="ico-tablet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="2.8" width="15" height="18.4" rx="2.2"/><path d="M11 18.4h2"/></g></symbol>
+    <symbol id="ico-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="ico-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+    <symbol id="ico-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+    <symbol id="ico-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
+    <symbol id="ico-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></g></symbol>
+  </svg>
+
+  <header class="site-header" data-open="false">
+    <div class="site-header__bar">
+      <a class="brand" href="#inicio" aria-label="Eugenio Morales Carrizo, ir al inicio">
+        <svg class="brand__mark" aria-hidden="true"><use href="#marca"/></svg>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menú">
+        <span></span><span></span>
+      </button>
+
+      <nav id="menu" class="nav" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#trayectoria">Trayectoria</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#tecnicas">Habilidades</a></li>
+          <li><a href="#hobbies">Hobbies</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio" aria-labelledby="titulo-hero">
+      <div class="hero__inner">
+       <div class="hero__text">
+        <svg class="hero__mark" viewBox="0 0 64 64" aria-hidden="true">
+          <path class="draw" pathLength="1" d="M32 3 61 32 32 61 3 32Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="miter"/>
+          <path class="draw draw--late" pathLength="1" d="M19 42V23l13 12 13-12v19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="miter"/>
+        </svg>
+
+        <h1 class="hero__name" id="titulo-hero">
+          <span class="hero__first">Eugenio Enrique</span>
+          <span class="hero__last">Morales Carrizo</span>
+        </h1>
+
+        <p class="hero__role"><span>Futuro </span>Arquitecto de software</p>
+        <p class="hero__lead">Construyo software y estoy aprendiendo a entender el sistema completo antes de escribir la primera línea.</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#sobre-mi">Más Sobre mí</a>
+          <a class="btn" href="#contacto">Escríbeme</a>
+        </div>
+       </div>
+
+        <!-- Tarjeta de presentación 2D. La foto es assets/foto-eugenio.jpg (ver README) -->
+        <div class="hero__card">
+          <div class="badge-scene" id="badge-scene">
+            <div class="lanyard" aria-hidden="true">
+              <span class="lanyard__strap">
+                <svg width="100%" height="100%" focusable="false">
+                  <defs><pattern id="strap-pattern" width="36" height="170" patternUnits="userSpaceOnUse">
+                    <text class="strap-text" transform="translate(23 80) rotate(-90)" text-anchor="middle">QUIPUX</text>
+                    <path class="strap-mark" d="M18 150l5 5-5 5-5-5z"/>
+                  </pattern></defs>
+                  <rect width="100%" height="100%" fill="url(#strap-pattern)"/>
+                </svg>
+              </span>
+              <span class="lanyard__clip"></span>
+            </div>
+
+            <div class="badge" id="badge" role="img" aria-label="Tarjeta de presentación de Eugenio Morales Carrizo, Arquitecto de Software en Quipux. El trabajador más querido de la empresa, después de Sebas. Credencial de simulación.">
+              <div class="badge__top" data-depth="30">
+                <img class="badge__logo" src="assets/quipux-logo.png" alt="Quipux" width="143" height="30">
+              </div>
+
+              <div class="badge__photo">
+                <!-- Dibujo de cordones con nudos (un quipu) que se ve mientras no haya foto -->
+                <svg class="badge__cords" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid slice">
+                  <g stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M0 40H200"/>
+                    <path d="M30 40V150M70 40V205M110 40V120M150 40V185M185 40V95"/>
+                  </g>
+                  <g fill="currentColor">
+                    <circle cx="30" cy="70" r="5"/><circle cx="30" cy="105" r="5"/><circle cx="30" cy="140" r="5"/>
+                    <circle cx="70" cy="75" r="5"/><circle cx="70" cy="110" r="5"/><circle cx="70" cy="165" r="5"/><circle cx="70" cy="195" r="5"/>
+                    <circle cx="110" cy="80" r="5"/><circle cx="110" cy="112" r="5"/>
+                    <circle cx="150" cy="72" r="5"/><circle cx="150" cy="130" r="5"/><circle cx="150" cy="170" r="5"/>
+                    <circle cx="185" cy="70" r="5"/><circle cx="185" cy="90" r="5"/>
+                  </g>
+                </svg>
+                <span class="badge__initials">EM</span>
+                <img class="badge__img" src="assets/foto-eugenio.jpg" alt="" width="640" height="857" decoding="async">
+              </div>
+
+              <div class="badge__id" data-depth="45">
+                <p class="badge__name">Eugenio Morales</p>
+                <p class="badge__role">Arquitecto de Software</p>
+              </div>
+
+              <div class="badge__bottom">
+                <p class="badge__quote" data-depth="40">El trabajador más querido de la empresa. (Después de Sebas)</p>
+                <svg class="badge__qr" data-depth="65" viewBox="0 0 29 29" role="img" aria-label="Código QR hacia el GitHub de Eugenio" shape-rendering="crispEdges">
+                  <rect width="100%" height="100%" fill="#fff"/><path fill="#0a0d10" d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM23 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM26 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM23 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM26 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM24 10h1v1h-1zM5 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM26 11h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM18 12h1v1h-1zM21 12h1v1h-1zM24 12h1v1h-1zM25 12h1v1h-1zM26 12h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM10 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM25 13h1v1h-1zM2 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM23 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM3 15h1v1h-1zM4 15h1v1h-1zM7 15h1v1h-1zM11 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM20 15h1v1h-1zM23 15h1v1h-1zM26 15h1v1h-1zM2 16h1v1h-1zM4 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM24 16h1v1h-1zM25 16h1v1h-1zM26 16h1v1h-1zM3 17h1v1h-1zM10 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM16 17h1v1h-1zM19 17h1v1h-1zM22 17h1v1h-1zM25 17h1v1h-1zM2 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM10 19h1v1h-1zM12 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM15 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM25 20h1v1h-1zM26 20h1v1h-1zM2 21h1v1h-1zM8 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM18 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM26 21h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM25 22h1v1h-1zM2 23h1v1h-1zM4 23h1v1h-1zM5 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM2 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM22 24h1v1h-1zM26 24h1v1h-1zM2 25h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM25 25h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM13 26h1v1h-1zM14 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE MÍ ============ -->
+    <section class="section" id="sobre-mi" aria-labelledby="t-sobre">
+      <div class="wrap">
+        <h2 class="title-left fx-title" id="t-sobre"><span>Sobre mí</span></h2>
+
+        <div class="about">
+          <!-- Carpeta: al pasar el cursor (o con clic/Enter) la tapa se inclina y se lee el texto -->
+          <div class="folder" id="folder">
+            <div class="folder__back" aria-hidden="true"></div>
+            <div class="folder__sheet" aria-hidden="true"></div>
+
+            <article class="folder__paper" id="folder-text">
+              <h3 class="folder__lead">Soy Eugenio, estudiante de desarrollo de software, y me estoy formando para ser arquitecto de software.</h3>
+              <p>Me gradúo de la media técnica a finales de 2026. Llevo un año construyendo software, y mi mayor escuela ha sido BiblioLend, un proyecto de grado en equipo que agiliza los préstamos de una biblioteca.</p>
+              <p>Quiero crecer en Quipux, una empresa con el sello People First: creo que el buen software lo hacen personas bien tratadas. Mi visión es empezar como desarrollador junior y llegar a ver el sistema completo, como un arquitecto.</p>
+            </article>
+
+            <button class="folder__front" type="button" aria-expanded="false" aria-controls="folder-text">
+              <svg class="folder__logo" aria-hidden="true"><use href="#marca"/></svg>
+              <span class="folder__hint"><span class="when-closed">Abrir</span><span class="when-open">Cerrar</span></span>
+            </button>
+          </div>
+
+          <!-- Tarjetas torcidas a propósito: se enderezan y se resaltan al pasar el cursor -->
+          <div class="learned">
+            <p class="learned__title">Cómo aprendí</p>
+            <ul class="learned__list">
+              <li class="tilt">
+                <span class="tilt__icon"><svg class="ico" aria-hidden="true"><use href="#ico-cap"/></svg></span>
+                <div><h3>Media técnica</h3><p>La base formal, en la I.E República de Honduras.</p></div>
+              </li>
+              <li class="tilt">
+                <span class="tilt__icon"><svg class="ico" aria-hidden="true"><use href="#ico-code"/></svg></span>
+                <div><h3>Proyectos</h3><p>BiblioLend: construir en equipo, con sus aciertos y errores.</p></div>
+              </li>
+              <li class="tilt">
+                <span class="tilt__icon"><svg class="ico" aria-hidden="true"><use href="#ico-seed"/></svg></span>
+                <div><h3>Semillero Quipux</h3><p>Cada sábado, aprendiendo con una meta clara.</p></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRAYECTORIA ============ -->
+    <section class="section" id="trayectoria" aria-labelledby="t-trayectoria">
+      <div class="wrap">
+        <h2 class="section__title fx-title" id="t-trayectoria"><span>Educación y experiencia</span></h2>
+        <p class="section__intro">Todavía no tengo experiencia laboral. Tengo proyectos, un equipo que lideré y una meta clara.</p>
+
+        <ol class="timeline">
+          <li class="tl">
+            <div class="tl__body">
+              <p class="tl__when">Ahora</p>
+              <h3>Semillero Quipux</h3>
+              <p class="tl__where">Aulas de Medellín</p>
+              <p>Voy todos los sábados con un objetivo claro: ganarlo. El premio es una beca que paga mis estudios y un trabajo que jamás me imaginé llegar a conseguir a tan corta edad.</p>
+            </div>
+          </li>
+          <li class="tl">
+            <div class="tl__body">
+              <p class="tl__when">Ahora</p>
+              <h3>BiblioLend</h3>
+              <p class="tl__where">Proyecto de grado de la media técnica</p>
+              <p>Una biblioteca digital que agiliza los préstamos de libros. La construyo en equipo con HTML5, CSS, JavaScript y SQL. Mi equipo está liderando el podio de la media técnica.</p>
+            </div>
+          </li>
+          <li class="tl">
+            <div class="tl__body">
+              <p class="tl__when">Finales de 2026</p>
+              <h3>Media técnica en Desarrollo de Software</h3>
+              <p class="tl__where">I.E República de Honduras</p>
+              <p>Me gradúo con un año de práctica en desarrollo: lógica, páginas web, bases de datos y trabajo en equipo.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PROYECTOS ============ -->
+    <section class="section" id="proyectos" aria-labelledby="t-proyectos">
+      <div class="wrap">
+        <h2 class="section__title proj-title fx-title" id="t-proyectos"><span>Proyectos</span></h2>
+
+        <div class="projects">
+        <article class="project project--bib" aria-labelledby="p-biblio">
+          <header class="project__head">
+            <p class="chip">En desarrollo</p>
+            <h3 id="p-biblio">BiblioLend</h3>
+            <p class="project__tagline">La biblioteca digital de mi media técnica: pides el libro en el sistema, lo reclamas en la biblioteca y recibes un ticket digital con tu fecha de devolución.</p>
+          </header>
+
+          <!-- Visor: tres pestañas (computador, celular, tablet). Cada una muestra la misma pantalla de BiblioLend en su dispositivo. -->
+          <div class="viewer">
+            <div class="viewer__tabs" role="tablist" aria-label="Ver BiblioLend en" aria-orientation="vertical">
+              <button class="viewer__tab" type="button" role="tab" id="tab-pc" aria-selected="true" aria-controls="panel-pc" title="Computador"><svg class="ico" aria-hidden="true"><use href="#ico-laptop"/></svg><span class="sr-only">Computador</span></button>
+              <button class="viewer__tab" type="button" role="tab" id="tab-celular" aria-selected="false" aria-controls="panel-celular" tabindex="-1" title="Celular"><svg class="ico" aria-hidden="true"><use href="#ico-phone"/></svg><span class="sr-only">Celular</span></button>
+              <button class="viewer__tab" type="button" role="tab" id="tab-tablet" aria-selected="false" aria-controls="panel-tablet" tabindex="-1" title="Tablet"><svg class="ico" aria-hidden="true"><use href="#ico-tablet"/></svg><span class="sr-only">Tablet</span></button>
+            </div>
+
+            <div class="viewer__stage">
+              <div class="viewer__panel" role="tabpanel" id="panel-pc" aria-labelledby="tab-pc" tabindex="0">
+                <div class="dev dev--laptop">
+                  <div class="dev__screen"><img src="assets/proyectos/bibliolend-pc.webp" alt="Página de inicio de BiblioLend en computador: &quot;El conocimiento de tu institución, a un clic de distancia&quot;, con los botones Iniciar Sesión y Descubrir funciones." width="918" height="593"></div>
+                  <div class="dev__base"></div>
+                </div>
+              </div>
+              <div class="viewer__panel" role="tabpanel" id="panel-celular" aria-labelledby="tab-celular" tabindex="0" hidden>
+                <div class="dev dev--phone">
+                  <div class="dev__screen"><img src="assets/proyectos/bibliolend-celular.webp" alt="Pantalla de inicio de sesión de BiblioLend en celular, con los campos tipo de usuario, correo institucional y contraseña." width="206" height="462"></div>
+                </div>
+              </div>
+              <div class="viewer__panel" role="tabpanel" id="panel-tablet" aria-labelledby="tab-tablet" tabindex="0" hidden>
+                <div class="dev dev--tablet">
+                  <div class="dev__screen"><img src="assets/proyectos/bibliolend-tablet.webp" alt="Pantalla de inicio de sesión de BiblioLend en tablet, con los campos tipo de usuario, correo institucional y contraseña." width="383" height="512"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project project--quipux" aria-labelledby="p-quipux">
+          <header class="project__head">
+            <p class="chip">Cada sábado</p>
+            <h3 id="p-quipux">Semillero Quipux</h3>
+            <p class="project__tagline">Mi camino para empezar a trabajar en Quipux.</p>
+          </header>
+          <div class="split split--tight">
+            <div class="split__col">
+              <h4>Qué es</h4>
+              <p>Un semillero de Aulas de Medellín en el que participo para ganar una beca que paga mis estudios y un trabajo como junior en la empresa Quipux.</p>
+            </div>
+            <div class="split__col">
+              <h4>Por qué lo quiero</h4>
+              <p>Dado mi contexto personal, es muy probable que esta sea mi última oportunidad para tener un trabajo en tech hasta los próximos 3 años, asi que la importancia que tiene para mí lograr ser convocado es inimaginable.</p>
+            </div>
+          </div>
+        </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECNOLOGÍAS ============ -->
+    <section class="section" id="tecnicas" aria-labelledby="t-tecnicas">
+      <div class="wrap">
+        <h2 class="title-left fx-title" id="t-tecnicas"><span>Tecnologías</span></h2>
+        <p class="lead-left">Con las que estoy aprendiendo y construyendo.</p>
+
+        <div class="stack">
+          <div class="stack__col">
+            <h3>Frontend</h3>
+            <p class="stack__sub">Interfaz y componentes</p>
+            <ul class="tiles">
+              <li class="tile"><img src="assets/icons/html5.svg" alt="" width="40" height="40" loading="lazy"><span>HTML5</span></li>
+              <li class="tile"><img src="assets/icons/css3.svg" alt="" width="40" height="40" loading="lazy"><span>CSS3</span></li>
+              <li class="tile"><img src="assets/icons/javascript.svg" alt="" width="40" height="40" loading="lazy"><span>JavaScript</span></li>
+            </ul>
+          </div>
+          <div class="stack__col">
+            <h3>Backend</h3>
+            <p class="stack__sub">Lógica y servicios</p>
+            <ul class="tiles">
+              <li class="tile"><img src="assets/icons/java.svg" alt="" width="40" height="40" loading="lazy"><span>Java</span></li>
+              <li class="tile"><img src="assets/icons/python.svg" alt="" width="40" height="40" loading="lazy"><span>Python</span></li>
+            </ul>
+          </div>
+          <div class="stack__col">
+            <h3>Versiones y despliegue</h3>
+            <p class="stack__sub">Código en equipo y publicación</p>
+            <ul class="tiles">
+              <li class="tile"><img src="assets/icons/git.svg" alt="" width="40" height="40" loading="lazy"><span>Git</span></li>
+              <li class="tile"><img src="assets/icons/github.svg" alt="" width="40" height="40" loading="lazy"><span>GitHub</span></li>
+              <li class="tile"><img src="assets/icons/netlify.svg" alt="" width="40" height="40" loading="lazy"><span>Netlify</span></li>
+            </ul>
+          </div>
+
+          <div class="stack__col stack__col--wide">
+            <h3>Idiomas</h3>
+            <p class="stack__sub">Para ampliar mi alcance</p>
+            <ul class="langs">
+              <li class="lang"><span class="lang__name">Español</span><span class="lang__level">Nativo</span></li>
+              <li class="lang"><span class="lang__name">Inglés</span><span class="lang__level">Nivel A2</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HABILIDADES BLANDAS ============ -->
+    <section class="section" id="blandas" aria-labelledby="t-blandas">
+      <div class="wrap">
+        <h2 class="section__title fx-title" id="t-blandas"><span>Habilidades blandas</span></h2>
+        <p class="section__intro">Cada una nació de algo que viví.</p>
+
+        <ul class="soft">
+          <li><h3>Comunicación asertiva</h3><p>Digo lo que pienso con respeto y escucho al otro. Así destrabamos a mi equipo.</p></li>
+          <li><h3>Liderazgo</h3><p>Mi equipo pasó de las tensiones a ser el número 1 de la media técnica.</p></li>
+          <li><h3>Resolución de conflictos</h3><p>La diplomacia siempre presente para proteger el resultado y a las personas.</p></li>
+          <li><h3>Manejo del tiempo</h3><p>Colegio, proyecto, semillero de los sábados y deporte caben cuando hay un plan.</p></li>
+          <li><h3>Aprendizaje rápido</h3><p>En un año pasé de cero a construir un sistema con base de datos.</p></li>
+          <li><h3>Mentalidad de principiante</h3><p>Pregunto sin miedo, recibo críticas con humildad y trato de mejorar cada día.</p></li>
+          <li><h3>Disciplina</h3><p>Natación, running, ciclismo y el basquet me enseñaron a ser constante.</p></li>
+          <li><h3>Creatividad</h3><p>Mi sueño es algún día lograr dominar las 7 artes.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ HOBBIES ============ -->
+    <section class="section" id="hobbies" aria-labelledby="t-hobbies">
+      <div class="wrap">
+        <h2 class="section__title fx-title" id="t-hobbies"><span>Hobbies</span></h2>
+        <p class="section__intro">Haga lo que haga, la pasión es lo que me impulsa.</p>
+
+        <h3 class="hobby-title">Hobbies Principales</h3>
+        <ul class="sports">
+          <li>Running</li>
+          <li>Gaming</li>
+          <li>Ciclismo</li>
+          <li>Programar</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section class="section section--contact" id="contacto" aria-labelledby="t-contacto">
+      <div class="wrap contact">
+        <div class="contact__lead">
+          <h2 class="contact__title fx-title" id="t-contacto"><span>Hablemos.</span></h2>
+          <p class="contact__text">Si tienes una oportunidad o un proyecto donde pueda aprender y aportar, escríbeme. Estoy en Colombia <span class="nowrap">(UTC-5)</span>.</p>
+          <div class="contact__actions">
+            <a class="btn btn--solid btn--icon" href="mailto:moralescarrizoe@gmail.com">Escríbeme<span class="btn__icon" aria-hidden="true"><svg class="ico"><use href="#ico-arrow"/></svg></span></a>
+            <button class="btn btn--ghost" type="button" id="copiar"><svg class="ico" aria-hidden="true"><use href="#ico-copy"/></svg><span id="copiar-texto">Copiar correo</span></button>
+          </div>
+          <!-- Redes sociales: una fila de íconos, de izquierda a derecha, debajo de los botones -->
+          <ul class="social" aria-label="Mis redes sociales">
+            <li><a class="social__link" href="https://www.linkedin.com/in/eugenio-morales-carrizo-14b629368/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (se abre en una pestaña nueva)" title="LinkedIn"><svg class="social__ico" aria-hidden="true"><use href="#ico-linkedin"/></svg></a></li>
+            <li><a class="social__link" href="https://www.tiktok.com/@eugenio_moral" target="_blank" rel="noopener noreferrer" aria-label="TikTok (se abre en una pestaña nueva)" title="TikTok"><svg class="social__ico" aria-hidden="true"><use href="#ico-tiktok"/></svg></a></li>
+            <li><a class="social__link" href="https://x.com/EugenioC1993" target="_blank" rel="noopener noreferrer" aria-label="X (se abre en una pestaña nueva)" title="X"><svg class="social__ico" aria-hidden="true"><use href="#ico-x"/></svg></a></li>
+            <li><a class="social__link" href="https://www.instagram.com/eu_moral/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (se abre en una pestaña nueva)" title="Instagram"><svg class="social__ico" aria-hidden="true"><use href="#ico-instagram"/></svg></a></li>
+          </ul>
+          <p class="sr-only" id="copiar-estado" role="status" aria-live="polite"></p>
+        </div>
+
+        <ul class="contact__list">
+          <li>
+            <a class="contact__row" href="mailto:moralescarrizoe@gmail.com">
+              <span class="contact__label">Correo</span>
+              <span class="contact__value" id="correo">moralescarrizoe@gmail.com</span>
+              <svg class="ico contact__go" aria-hidden="true"><use href="#ico-arrow"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="contact__row" href="https://wa.me/573135318195" target="_blank" rel="noopener noreferrer">
+              <span class="contact__label">WhatsApp</span>
+              <span class="contact__value">+57 313 531 8195</span>
+              <svg class="ico contact__go" aria-hidden="true"><use href="#ico-arrow"/></svg>
+              <span class="sr-only">(se abre en una pestaña nueva)</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact__row" href="https://github.com/Eugenio-1993" target="_blank" rel="noopener noreferrer">
+              <span class="contact__label">GitHub</span>
+              <span class="contact__value">Eugenio-1993</span>
+              <svg class="ico contact__go" aria-hidden="true"><use href="#ico-arrow"/></svg>
+              <span class="sr-only">(se abre en una pestaña nueva)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <svg class="footer__mark" aria-hidden="true"><use href="#marca"/></svg>
+    <p>Eugenio Enrique Morales Carrizo, <span id="anio">2026</span></p>
+  </footer>
+
+  <!-- Accesibilidad: botón lateral y panel de ajustes (css/accesibilidad.css, js/accesibilidad.js) -->
+<div class="a11y-widget" id="a11y-widget">
+
+  <!-- Botón-pestaña: de cerrado solo se ve el ícono; con hover/foco aparece la palabra "Accesibilidad" -->
+  <button type="button" class="a11y-trigger" id="a11y-trigger"
+          aria-haspopup="dialog" aria-expanded="false" aria-controls="a11y-panel">
+    <span class="a11y-trigger__label">Accesibilidad</span>
+    <span class="a11y-trigger__icon" aria-hidden="true">
+      <!-- Ícono universal: persona con los brazos abiertos -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <circle cx="12" cy="4" r="1.6" fill="currentColor"/>
+        <path d="M4 8.5h16"/>
+        <path d="M12 8.5V14"/>
+        <path d="M12 14l-3.5 7"/>
+        <path d="M12 14l3.5 7"/>
+      </svg>
+    </span>
+  </button>
+
+  <!-- Panel flotante -->
+  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-labelledby="a11y-title">
+    <div class="a11y-panel__head">
+      <h2 class="a11y-panel__title" id="a11y-title">Accesibilidad</h2>
+      <button type="button" class="a11y-close" id="a11y-close" aria-label="Cerrar menú de accesibilidad">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Tamaño del texto -->
+    <fieldset class="a11y-group">
+      <legend class="a11y-group__title">Tamaño del texto</legend>
+      <div class="a11y-size">
+        <button type="button" class="a11y-btn a11y-btn--size" data-a11y="text-down">
+          <b aria-hidden="true">A−</b><span class="a11y-sr-only">Disminuir tamaño de texto</span>
+        </button>
+        <output class="a11y-size__value" id="a11y-size-value" aria-hidden="true">100%</output>
+        <button type="button" class="a11y-btn a11y-btn--size" data-a11y="text-up">
+          <b aria-hidden="true">A+</b><span class="a11y-sr-only">Aumentar tamaño de texto</span>
+        </button>
+      </div>
+    </fieldset>
+
+    <!-- Ajustes visuales: interruptores (role="switch") -->
+    <fieldset class="a11y-group">
+      <legend class="a11y-group__title">Pantalla y lectura</legend>
+
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y="contrast">
+        <span>Alto contraste</span><span class="a11y-switch__track" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y="grayscale">
+        <span>Escala de grises</span><span class="a11y-switch__track" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y="underline">
+        <span>Subrayar enlaces</span><span class="a11y-switch__track" aria-hidden="true"></span>
+      </button>
+
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y="dyslexia">
+        <span>Fuente para dislexia</span><span class="a11y-switch__track" aria-hidden="true"></span>
+      </button>
+    </fieldset>
+
+    <button type="button" class="a11y-btn a11y-reset" data-a11y="reset">Restablecer todos los ajustes</button>
+
+    <!-- Avisos para lectores de pantalla ("Texto al 110 %", "Alto contraste activado"...) -->
+    <p class="a11y-sr-only" id="a11y-status" role="status" aria-live="polite"></p>
+  </section>
+</div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/accesibilidad.js" defer></script>
+</body>
+</html>

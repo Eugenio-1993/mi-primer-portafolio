@@ -1,0 +1,1313 @@
+/* =====================================================================
+   PORTAFOLIO · Eugenio Enrique Morales Carrizo
+   Idea de diseño: todo gira alrededor de un EJE DE SIMETRÍA vertical.
+   - Negro puro y blanco, como Tesla y SpaceX.
+   - Composición simétrica y bordes rectos, con carácter deportivo.
+   - Un solo color de acento (azul hielo) para lo importante.
+   Este archivo está ordenado de arriba hacia abajo, igual que la página.
+   ===================================================================== */
+
+/* ---------- 0. Tipografías propias (archivos dentro de assets/fonts) ----------
+   Son tipografías "variables": un solo archivo trae todos los grosores. */
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/big-shoulders-display-latin-wght-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-sans-latin-wght-normal.woff2") format("woff2");
+}
+
+/* ---------- 1. Variables (los "ajustes" del diseño) ---------- */
+:root {
+  --black: #000000;
+  --bg: #1b1d21;
+  --ink: #f5f5f3;
+  --muted: #a1a5ab;
+  --line: rgba(255, 255, 255, 0.16);
+  --ice: #8fc7ff;
+  --radius: 12px;
+
+  /* Colores de la tarjeta de Quipux. Cámbialos por los colores oficiales de la marca si los tienes. */
+  --badge-bg: #f3f4f1;
+  --badge-ink: #0a0d10;
+  --badge-accent: #1366c1;
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --wrap: min(72rem, 100% - 2.5rem);
+  --header-h: 72px;
+}
+
+/* ---------- 2. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 8px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.no-scroll { overflow: hidden; }
+
+h1, h2, h3, h4, p, ul, ol { margin-top: 0; }
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+}
+
+.sprite { position: absolute; width: 0; height: 0; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem; top: -4rem;
+  z-index: 100;
+  padding: 0.7rem 1.1rem;
+  background: var(--ink);
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+main, .footer { position: relative; z-index: 1; }
+/* main recibe el foco al usar "Saltar al contenido"; no necesita borde porque no es un control */
+main:focus { outline: none; }
+
+/* ---------- 4. Encabezado y navegación ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  z-index: 50;
+}
+/* El fondo borroso va en un pseudo-elemento para no romper el menú móvil */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(165deg, #15181c, #0b0d10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-header__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--wrap);
+  height: 100%;
+  margin-inline: auto;
+}
+
+.brand {
+  position: relative;
+  z-index: 3;
+  display: block;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.brand:hover { color: var(--ice); }
+.brand__mark { width: 36px; height: 36px; }
+
+.nav { display: flex; align-items: center; }
+.nav__list {
+  display: flex;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  margin: 0; padding: 0;
+  list-style: none;
+}
+
+.nav a {
+  display: inline-block;
+  padding-block: 0.4rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="location"] { color: var(--ink); border-bottom-color: var(--ice); }
+
+.menu-toggle {
+  display: none;
+  position: relative;
+  z-index: 3;
+  width: 44px; height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+.menu-toggle span {
+  position: absolute;
+  left: 11px; right: 11px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.25s, top 0.25s;
+}
+.menu-toggle span:nth-child(1) { top: 17px; }
+.menu-toggle span:nth-child(2) { top: 25px; }
+.site-header[data-open="true"] .menu-toggle span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+.site-header[data-open="true"] .menu-toggle span:nth-child(2) { top: 21px; transform: rotate(-45deg); }
+
+/* ---------- 5. Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.7rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn:hover { background: var(--ink); color: var(--black); border-color: var(--ink); }
+.btn--solid { background: var(--ink); color: var(--black); border-color: var(--ink); }
+.btn--solid:hover { background: var(--ice); border-color: var(--ice); }
+.btn--icon { gap: 0.9rem; padding-right: 0.55rem; }
+.btn__icon { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; background: rgba(0, 0, 0, 0.14); border-radius: 7px; }
+.btn--ghost { gap: 0.6rem; }
+.btn .ico { width: 1.1rem; height: 1.1rem; }
+
+/* ---------- 5b. Fondo interactivo (canvas fijo detrás de todo) ---------- */
+.bg { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + 2.5rem) 1.25rem 4.5rem;
+  overflow: hidden;
+}
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  width: min(76rem, 100%);
+}
+.hero__text { text-align: left; }
+
+.hero__mark {
+  width: 60px; height: 60px;
+  margin: 0 0 1.5rem;
+  color: var(--ice);
+}
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.1s ease-out 0.2s forwards;
+}
+.draw--late { animation-delay: 0.9s; }
+
+.hero__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.1rem, 6.2vw, 5.6rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+.hero__name > span { display: block; }
+
+/* Las dos líneas se abren desde la izquierda al cargar. El recorte final es amplio
+   para que las letras puedan crecer y subir con el cursor sin cortarse. */
+.hero__first { animation: open 1.1s cubic-bezier(0.2, 0.7, 0.1, 1) 0.5s both; }
+.hero__last {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+  animation: open 1.1s cubic-bezier(0.2, 0.7, 0.1, 1) 0.75s both;
+}
+@supports not (-webkit-text-stroke: 1px #fff) {
+  .hero__last { color: var(--ink); }
+}
+
+/* Efecto del cursor: JS reparte cada letra en un <span class="ch"> y le da dos valores:
+   --i  (qué tan cerca está el cursor, de 0 a 1)  y  --dx (cuánto se aparta, a un lado u otro). */
+.word { display: inline-block; white-space: nowrap; }
+.ch {
+  display: inline-block;
+  --i: 0;
+  --dx: 0;
+  transform-origin: 50% 85%;
+  transform: translate3d(calc(var(--dx) * 1em), calc(var(--i) * -0.09em), 0) scale(calc(1 + var(--i) * 0.2));
+  will-change: transform;
+}
+
+.hero__role {
+  margin: 1.4rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.hero__role span { color: var(--muted); font-weight: 500; }
+
+.hero__lead {
+  max-width: 34rem;
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.hero__role, .hero__lead, .hero__actions { animation: appear 0.9s ease-out 1.6s both; }
+
+@keyframes draw   { to { stroke-dashoffset: 0; } }
+@keyframes open   {
+  from { clip-path: inset(-60% 100% -60% -10%); }
+  to   { clip-path: inset(-60% -10% -60% -10%); }
+}
+@keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- 6b. Tarjeta 2D ---------- */
+.hero__card { display: flex; justify-content: center; }
+
+.badge-scene {
+  position: relative;
+  width: min(19rem, 100%);
+  --seal: 0.3rem;                   /* grosor del borde plástico transparente de la tarjeta (plastificado) */
+  padding-top: 3.4rem;               /* espacio para el cordón y el clip */
+  transform-origin: 50% -55vh;       /* el cordón cuelga de arriba: de ahí nace el vaivén */
+  animation: swing 2.6s cubic-bezier(0.25, 0.1, 0.25, 1) 1.3s both;
+}
+@keyframes swing {
+  0%   { transform: rotate(7deg); }
+  22%  { transform: rotate(-4.5deg); }
+  45%  { transform: rotate(2.6deg); }
+  68%  { transform: rotate(-1.2deg); }
+  100% { transform: rotate(0); }
+}
+
+.lanyard {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 3.9rem - var(--seal));
+  width: 36px;
+  height: 120vh;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.lanyard__strap {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.38) 0, rgba(255,255,255,.1) 14%, rgba(255,255,255,0) 50%, rgba(0,0,0,.18) 86%, rgba(0,0,0,.4) 100%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, rgba(0,0,0,.07) 1px 3px),
+    #14509a;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35), 3px 0 8px -2px rgba(0,0,0,.5);
+}
+.lanyard__strap::before {
+  content: "";
+  position: absolute;
+  inset: 0 3px;
+  border-inline: 1.5px dashed rgba(255, 255, 255, 0.45);
+}
+.lanyard__strap svg { position: absolute; inset: 0; }
+.strap-text { fill: #f4f7fb; font: 800 15px/1 var(--font-display); letter-spacing: 0.22em; }
+.strap-mark { fill: #f4f7fb; opacity: 0.85; }
+.lanyard__clip {
+  position: absolute;
+  left: 50%; bottom: -2px;
+  width: 42px; height: 18px;
+  transform: translateX(-50%);
+  background: linear-gradient(#f2f4f7, #8b929b);
+  border-radius: 3px 3px 8px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6), inset 0 1px 0 #fff;
+}
+
+.badge {
+  --mx: 0px;        /* desplazamiento de toda la tarjeta (lo calcula js/main.js) */
+  --my: 0px;
+  --rot: 0deg;
+  --nx: 0;          /* posición del cursor de -1 a 1: mueve cada pieza un poco (parallax 2D) */
+  --ny: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  aspect-ratio: 0.62;
+  padding: 1rem;
+  /* Plastificado: el borde es transparente (se ve el fondo a través) con un velo de luz; el papel queda
+     recortado al interior (padding-box) y el velo se dibuja en toda la caja (border-box) */
+  border: var(--seal) solid transparent;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") padding-box,
+    linear-gradient(155deg, #fafaf8, var(--badge-bg) 45%, #dfe2e6) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.07) 36%, rgba(255, 255, 255, 0.12) 64%, rgba(255, 255, 255, 0.3)) border-box;
+  color: var(--badge-ink);
+  border-radius: calc(0.3rem + var(--seal));
+  /* Realismo (de arriba abajo): luz en los bordes, canto con grosor, y dos sombras; la oscura se desplaza
+     al lado contrario del giro (--sheen, lo calcula js/main.js) como si la luz viniera de arriba */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.18),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    1px 2px 0 rgba(255, 255, 255, 0.2),
+    2px 4px 0 rgba(255, 255, 255, 0.09),
+    0 30px 60px -20px rgba(143, 199, 255, 0.28),
+    calc(var(--sheen, 0) * -0.9px) 42px 70px -30px rgba(0, 0, 0, 0.9);
+  transform: translate(var(--mx), var(--my)) rotate(var(--rot)) perspective(900px) rotateY(var(--ry, 0deg));
+  will-change: transform;
+  /* Tarjeta agarrable (js/main.js, bloque 5b): gira sobre su ojal (--lag) al ser arrastrada */
+  transform-origin: 50% calc(var(--seal) + 0.5rem);   /* el ojal está 0.5rem dentro del papel */
+  rotate: var(--lag, 0deg);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;   /* en pantalla táctil el arrastre horizontal mueve la tarjeta y el vertical sigue haciendo scroll */
+}
+.badge-scene.is-grabbed .badge { cursor: grabbing; }
+/* Brillo de plástico: un reflejo puntual y una franja de luz que se desplazan sobre la tarjeta cuando
+   gira, se balancea o el cursor la inclina. Se recorta con el borde redondeado y no recibe clics. */
+.badge::after {
+  --sx: calc(50% - var(--sheen, 0) * 1.6% + var(--nx) * 22%);
+  --sy: calc(26% + var(--ny) * 18%);
+  content: "";
+  position: absolute;
+  inset: calc(var(--seal) * -1);   /* cubre el borde plástico además del papel */
+  border-radius: inherit;
+  pointer-events: none;
+  /* Canto biselado del plástico: luz fina arriba y en el borde, sombra suave abajo */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.14);
+  background:
+    radial-gradient(circle at var(--sx) var(--sy), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0) calc(var(--sx) - 24%), rgba(255, 255, 255, 0.2) var(--sx), rgba(255, 255, 255, 0) calc(var(--sx) + 24%));
+}
+.badge::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0.5rem;
+  width: 3.2rem; height: 0.42rem;
+  transform: translateX(-50%);
+  background: #14181d;
+  border-radius: 999px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Cada pieza se desplaza un poco distinto según el cursor (--k), así se separan unas de otras
+   sin necesitar 3D. Al pasar el cursor sobre una pieza, crece un poco (--s). */
+.badge [data-depth] {
+  translate: calc(var(--nx) * var(--k, 0) * 8px) calc(var(--ny) * var(--k, 0) * 6px);
+  scale: var(--s, 1);
+  transition: scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s;
+}
+.badge [data-depth="30"] { --k: 0.3; }
+.badge [data-depth="40"] { --k: 0.4; }
+.badge [data-depth="45"] { --k: 0.45; }
+.badge [data-depth="65"] { --k: 0.65; }
+.badge [data-depth]:hover { --s: 1.04; }
+
+.badge__top {
+  display: flex;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.badge__logo { display: block; height: 1.9rem; width: auto; max-width: 70%; object-fit: contain; object-position: left center; }
+
+.badge__photo {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: linear-gradient(170deg, #101a24, #070b10);
+  border-radius: 0.7rem;
+  color: rgba(143, 199, 255, 0.28);
+}
+.badge__cords { position: absolute; inset: 0; width: 100%; height: 100%; }
+.badge__initials {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 5.5rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 30px rgba(143, 199, 255, 0.5);
+}
+.badge__img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.badge__id { padding-top: 0.15rem; }
+.badge__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.85rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.badge__role { margin: 0.45rem 0 0; font-size: 0.92rem; font-weight: 600; line-height: 1.3; }
+
+.badge__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+}
+.badge__quote {
+  margin: 0;
+  color: var(--badge-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.badge__qr {
+  flex: none;
+  width: 3.9rem; height: 3.9rem;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- 7. Secciones (estructura común) ---------- */
+.wrap { width: var(--wrap); margin-inline: auto; }
+
+.section {
+  padding-block: clamp(5rem, 11vw, 9rem);
+  border-top: 1px solid var(--line);
+  overflow-x: clip;   /* las tarjetas inclinadas pueden asomar unos píxeles por el borde: se recortan para que la página no haga scroll lateral */
+}
+
+.section__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+  line-height: 0.95;
+  text-align: center;
+  text-transform: uppercase;
+}
+.section__intro {
+  max-width: 38rem;
+  margin: 1.25rem auto 3.5rem;
+  color: var(--muted);
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(2.5rem, 8vw, 6rem);
+  row-gap: 2.5rem;
+}
+.split__col h4 {
+  margin-bottom: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+.split__col p { max-width: 34rem; margin-bottom: 1rem; }
+
+/* ---------- 8. Trayectoria (línea de tiempo espejo) ---------- */
+.timeline {
+  --tl-gap: 3.25rem;                    /* espacio entre hitos; la línea usa este mismo valor para llegar al siguiente rombo */
+  --tl-line: rgba(143, 199, 255, 0.55); /* color de la línea (el azul "ice" más suave) */
+  position: relative;
+  display: grid;
+  gap: var(--tl-gap);
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.tl {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2.75rem 1fr;
+  align-items: start;
+}
+/* El rombo cae justo sobre el eje central y va por encima de la línea (z-index) */
+.tl::before {
+  content: "";
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 11px; height: 11px;
+  margin-top: 0.5rem;
+  background: var(--ice);
+  box-shadow: 0 0 0 3px var(--bg);
+  transform: rotate(45deg);
+}
+/* La línea: cada hito (menos el último) dibuja un tramo desde el centro de su rombo
+   hasta el centro del rombo siguiente. Juntos forman una sola línea que toca del hito 1 al 3
+   y no se pasa de ahí, sin importar cuánto texto tenga cada tarjeta.
+   top = margen del rombo (0.5rem) + la mitad de su alto (5.5px). */
+.tl:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: calc(0.5rem + 5.5px);
+  width: 1px;
+  height: calc(100% + var(--tl-gap));
+  background: var(--tl-line);
+}
+.tl__body { grid-row: 1; }
+.tl:nth-child(odd) .tl__body  { grid-column: 1; text-align: right; }
+.tl:nth-child(even) .tl__body { grid-column: 3; text-align: left; }
+
+.tl__when { margin: 0 0 0.35rem; color: var(--ice); font-size: 0.92rem; font-weight: 600; }
+.tl h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.tl__where { margin: 0.5rem 0 0.9rem; color: var(--muted); }
+.tl__body p:last-child { max-width: 28rem; margin-bottom: 0; }
+.tl:nth-child(odd) .tl__body p:last-child { margin-left: auto; }
+
+/* ---------- 9. Proyectos ---------- */
+/* Título "Proyectos": más grande y más grueso que los demás. */
+.proj-title {
+  font-weight: 900;
+  font-size: clamp(3.4rem, 8.5vw, 6.5rem);
+  line-height: 0.92;
+}
+
+/* Animación de TODOS los títulos de sección (clase .fx-title), la misma del nombre del hero.
+   El <span> es inline-block para que la entrada empiece justo en la primera letra y no en el borde de la página. */
+.fx-title > span { display: inline-block; }
+/* Entrada: el título se esconde (clip-path) y se abre de izquierda a derecha al aparecer en pantalla.
+   Las dos clases las pone js/main.js (bloque 6); "open" es la misma animación del nombre del hero. */
+.fx-title.will-reveal > span { clip-path: inset(-60% 100% -60% -10%); }
+.fx-title.will-reveal.is-in > span { animation: open 1.1s cubic-bezier(0.2, 0.7, 0.1, 1) both; }
+
+/* Los dos proyectos, uno al lado del otro. Las tarjetas de una misma fila miden lo mismo de alto. */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2.5vw, 2rem);
+  margin-top: 3.5rem;
+}
+.project {
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 1.75rem 2rem;
+  background: linear-gradient(165deg, rgba(22, 26, 32, 0.94), rgba(9, 11, 14, 0.94));
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+}
+.project__head { text-align: center; }
+.chip {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.25rem 0.85rem;
+  border: 1px solid var(--ice);
+  color: var(--ice);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.project h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.project__tagline { margin: 0.9rem auto 0; max-width: 32rem; color: var(--muted); font-size: 1.05rem; }
+
+/* Dentro de la tarjeta, los textos "El problema / El reto" van uno debajo del otro */
+.project .split { grid-template-columns: 1fr; row-gap: 1.75rem; margin-top: 2rem; }
+
+/* BiblioLend: visor de dispositivos. Tres botones en columna (computador, celular, tablet) y, al lado,
+   la misma pantalla dentro de un marco dibujado con CSS (sin imágenes de dispositivos).
+   Cada marco toma su forma de la captura que lleva dentro: la imagen manda el tamaño y el marco la rodea. */
+.viewer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.viewer__tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* uno arriba, otro en el medio y otro abajo */
+  gap: 0.75rem;
+}
+.viewer__tab {
+  display: grid;
+  place-items: center;
+  width: 3.25rem; height: 3.25rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.viewer__tab .ico { width: 1.6rem; height: 1.6rem; }
+.viewer__tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--black); }
+@media (hover: hover) {
+  .viewer__tab[aria-selected="false"]:hover { border-color: var(--ice); color: var(--ink); }
+}
+
+.viewer__stage {
+  display: grid;
+  place-items: center;
+  min-height: 23rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.viewer__panel { display: grid; place-items: center; width: 100%; animation: appear 0.45s ease-out; }
+.viewer__panel[hidden] { display: none; }
+
+.dev { position: relative; filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.55)); }
+.dev__screen { position: relative; background: #0c0d10; }
+.dev__screen img { display: block; width: 100%; height: auto; }
+
+/* Computador: pantalla con una cámara pequeña y una base más ancha debajo */
+.dev--laptop { width: min(100%, 26rem); }
+.dev--laptop .dev__screen { padding: 0.7rem 0.6rem 0.6rem; border-radius: 0.9rem 0.9rem 0.25rem 0.25rem; }
+.dev--laptop .dev__screen::before {
+  content: "";
+  position: absolute;
+  top: 0.26rem; left: 50%;
+  width: 0.24rem; height: 0.24rem;
+  margin-left: -0.12rem;
+  border-radius: 50%;
+  background: #2b2d33;
+}
+.dev--laptop .dev__screen img { border-radius: 2px; }
+.dev__base {
+  position: relative;
+  height: 0.7rem;
+  margin-inline: -4%;
+  background: linear-gradient(#cfd2d8, #8d9199);
+  border-radius: 0 0 0.9rem 0.9rem;
+}
+.dev__base::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  width: 18%; height: 0.24rem;
+  transform: translateX(-50%);
+  background: #6c7078;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+/* Celular estilo Pixel: esquinas redondeadas, borde delgado y cámara en un punto dentro de la pantalla */
+.dev--phone .dev__screen { padding: 0.38rem; border-radius: 1.9rem; }
+.dev--phone .dev__screen img { width: auto; height: 19rem; border-radius: 1.5rem; }
+.dev--phone .dev__screen::after {
+  content: "";
+  position: absolute;
+  top: 0.95rem; left: 50%;
+  width: 0.55rem; height: 0.55rem;
+  margin-left: -0.275rem;
+  border-radius: 50%;
+  background: #050506;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.07);
+}
+.dev--phone::before {      /* botón de encendido, en el costado derecho */
+  content: "";
+  position: absolute;
+  right: -0.17rem; top: 28%;
+  width: 0.17rem; height: 3rem;
+  background: #1a1b1f;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Tablet: marco más grueso que el del celular y cámara en el borde superior */
+.dev--tablet .dev__screen { padding: 0.8rem; border-radius: 1.4rem; }
+.dev--tablet .dev__screen img { width: auto; height: 19rem; border-radius: 0.45rem; }
+.dev--tablet .dev__screen::after {
+  content: "";
+  position: absolute;
+  top: 0.3rem; left: 50%;
+  width: 0.26rem; height: 0.26rem;
+  margin-left: -0.13rem;
+  border-radius: 50%;
+  background: #2b2d33;
+}
+
+/* ---------- 10. Sobre mí: carpeta + tarjetas torcidas ---------- */
+.ico { width: 1.25rem; height: 1.25rem; flex: none; }
+
+.title-left {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.lead-left { max-width: 34rem; margin: 1.1rem 0 0; color: var(--muted); font-size: 1.15rem; }
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5.5rem);
+  align-items: start;
+  margin-top: 2.75rem;
+}
+
+/* Carpeta. Tres capas: fondo (con pestaña), hojas, y la tapa que se inclina al abrir.
+   La tapa gira sobre su borde inferior (transform-origin) con rotateX. */
+.folder {
+  --peek: 5.5rem;                       /* cuánto asoma la hoja con la carpeta cerrada */
+  position: relative;
+  padding: 1.5rem 0 7rem;
+  perspective: 2600px;
+  isolation: isolate;
+}
+.folder__back {
+  position: absolute;
+  inset: 1.5rem 0 0 0;
+  z-index: 0;
+  background: linear-gradient(#383b41, #2a2d32);
+  border-radius: 0 var(--radius) var(--radius) var(--radius);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+.folder__back::before {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 100%;
+  width: 9.5rem; height: 1.5rem;
+  background: #383b41;
+  clip-path: polygon(0 12%, 6% 0, 76% 0, 100% 100%, 0 100%);
+}
+.folder__sheet {
+  position: absolute;
+  z-index: 1;
+  top: 2.2rem; left: 1.7rem; right: 0.4rem;
+  height: 8rem;
+  background: #a9acb2;
+  border-radius: 10px;
+  transform: rotate(-0.7deg);
+  transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.25, 1);
+  min-height: 350px;
+}
+.folder__paper {
+  position: relative;
+  z-index: 2;
+  margin: 1.1rem 1.1rem 0;
+  padding: 1.5rem 1.6rem 1.7rem;
+  background: #ededee;
+  color: #0b0d10;
+  border-radius: 10px;
+  box-shadow: 0 -6px 18px -8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+.folder__lead {
+  margin: 0 0 1rem;
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.folder__paper p { max-width: 46rem; margin: 0 0 0.85rem; font-size: 0.98rem; color: #2a2f36; line-height: 1.6; }
+.folder__paper p:last-child { margin-bottom: 0; }
+
+.folder__front {
+  position: absolute;
+  z-index: 3;
+  left: 0; right: 0; bottom: 0;
+  top: calc(2.6rem + var(--peek));
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #6d7077 0, #54575e 8%, #4b4e56 100%);
+  box-shadow: 0 -10px 24px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #f2f2f3;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform-origin: 50% 100%;
+  transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.25, 1), filter 0.8s;
+}
+.folder__front:focus-visible { outline: 2px solid var(--ice); outline-offset: 4px; }
+.folder__logo {
+  position: absolute;
+  left: 50%; top: 46%;
+  width: min(42%, 13rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: rgba(22, 24, 28, 0.5);
+}
+.folder__hint { position: absolute; right: 1.6rem; bottom: 1.5rem; color: #d7d8db; font-size: 0.95rem; }
+.when-open { display: none; }
+.nowrap { white-space: nowrap; }
+
+/* Estado abierto: con el cursor encima (.is-hover), o fijado con clic o Enter (.is-pinned) */
+.folder.is-hover .folder__front,
+.folder.is-pinned .folder__front { transform: rotateX(-78deg); filter: brightness(0.72); }
+.folder.is-hover .folder__paper,
+.folder.is-pinned .folder__paper { transform: translateY(-0.35rem); }
+.folder.is-hover .folder__sheet,
+.folder.is-pinned .folder__sheet { transform: translate(-0.3rem, -0.55rem) rotate(-2.6deg); }
+.folder.is-pinned .when-closed { display: none; }
+.folder.is-pinned .when-open { display: inline; }
+
+/* Tarjetas "Cómo aprendí": torcidas a propósito, se enderezan y se resaltan con el cursor */
+.learned__title { margin: 0 0 1rem; color: var(--muted); font-size: 0.98rem; }
+.learned__list {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0; padding: 0;
+  list-style: none;
+  perspective: 900px;
+}
+.tilt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.3rem;
+  background: linear-gradient(165deg, #15181c, #0b0d10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 26px -16px #000;
+  transform-origin: 0% 50%;
+  transform: rotateY(var(--ry)) rotateZ(var(--rz));
+  transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.25, 1), border-color 0.3s, box-shadow 0.3s;
+}
+.tilt:nth-child(1) { --ry: -11deg; --rz: 0.2deg; }
+.tilt:nth-child(2) { --ry: -11deg; --rz: 0.2deg; }
+.tilt:nth-child(3) { --ry: -11deg; --rz: 0.2deg; }
+.tilt:hover {
+  z-index: 2;
+  transform: rotateY(0) rotateZ(0) translateX(0.5rem);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 0 30px rgba(255, 255, 255, 0.12), 0 22px 36px -18px #000;
+}
+.tilt__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.8rem; height: 2.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+.tilt h3 { margin: 0; font-size: 1.12rem; font-weight: 700; line-height: 1.2; }
+.tilt p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+
+/* ---------- 10b. Tecnologías ---------- */
+.stack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin-top: 3rem;
+}
+.stack__col {
+  padding: 1.6rem 1.5rem 1.5rem;
+  background: linear-gradient(165deg, rgba(22, 26, 32, 0.94), rgba(9, 11, 14, 0.94));
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+}
+.stack__col--wide { grid-column: 1 / -1; }
+.stack__col h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 2.6vw, 2.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.stack__sub { margin: 0.45rem 0 1.4rem; color: var(--muted); font-size: 0.92rem; }
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 7.4rem;
+  padding: 1rem 0.4rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  transition: transform 0.25s, border-color 0.25s, background 0.25s;
+}
+.tile img { width: 2.5rem; height: 2.5rem; }
+.tile img[src$="github.svg"] { filter: invert(1); }   /* el logo original es negro: lo pasamos a blanco */
+.tile:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.5); background: rgba(255, 255, 255, 0.06); }
+
+.langs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+.lang {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.3rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.lang__name { font-size: 1.1rem; font-weight: 600; }
+.lang__level { color: var(--ice); font-weight: 600; }
+
+/* ---------- 11. Habilidades blandas ----------
+   Mismo efecto que las tarjetas de "Cómo aprendí" (.tilt): torcidas a propósito,
+   se enderezan y se resaltan con un contorno blanco al pasar el cursor. */
+.soft {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 2.75rem 0 0; padding: 0;
+  list-style: none;
+}
+.soft li {
+  position: relative;
+  padding: 1.6rem 1.4rem 1.7rem 1.65rem;
+  background: linear-gradient(165deg, #15181c, #0b0d10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 26px -16px #000;
+  transform-origin: 0% 50%;
+  /* perspective() va dentro de cada tarjeta para que todas se vean igual de inclinadas, estén en la columna que estén */
+  transform: perspective(900px) rotateY(var(--ry)) rotateZ(var(--rz));
+  transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.25, 1), border-color 0.3s, box-shadow 0.3s;
+}
+/* Tres inclinaciones que se repiten, como en "Cómo aprendí" */
+.soft li:nth-child(3n + 1) { --ry: 0deg; --rz: 0deg; }
+.soft li:nth-child(3n + 2) { --ry: 0deg;  --rz: 0deg;  }
+.soft li:nth-child(3n + 3) { --ry: 0deg; --rz: 0deg;   }
+.soft li:hover,
+.soft li:focus-within {
+  z-index: 2;
+  transform: perspective(900px) rotateY(0) rotateZ(0);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 0 30px rgba(255, 255, 255, 0.12), 0 22px 36px -18px #000;
+}
+.soft h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.soft p { margin: 0; color: #c3c7cd; font-size: 0.98rem; }
+
+/* Cursor "bola": solo dentro de Habilidades blandas y Hobbies, y solo con mouse (js/main.js, bloque 7b).
+   Es blanca y usa mix-blend-mode: difference, así que muestra el color contrario al de lo que hay debajo.
+   Va como hija directa de <body> para poder mezclarse con TODO lo que está detrás (fondo, tarjetas y texto). */
+.has-ball #blandas, .has-ball #blandas *,
+.has-ball #hobbies, .has-ball #hobbies * { cursor: none; }
+.ball {
+  position: fixed;
+  left: 0; top: 0;
+  z-index: 200;
+  width: 34px; height: 34px;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+/* El círculo va en ::before para poder escalarlo sin afectar la posición (JS mueve .ball con transform) */
+.ball::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fff;
+  scale: 0.4;
+  transition: scale 0.3s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+.ball.is-on { opacity: 1; }
+.ball.is-on::before { scale: 1; }
+.ball.is-on.is-big::before { scale: 2; }
+
+/* ---------- 12. Hobbies ---------- */
+.hobby-title {
+  margin: 3.25rem 0 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.hobby-title:first-of-type { margin-top: 0; }
+
+.sports {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin: 0; padding: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.sports li {
+  display: grid;
+  place-items: center;
+  padding: clamp(1.75rem, 5vw, 3.25rem) 0.75rem;
+  background: var(--black);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.6vw, 3.4rem);
+  line-height: 1;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.sports li:hover { color: var(--ice); }
+
+/* ---------- 13. Contacto ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.contact__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.4rem, 10vw, 8rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--ink);   /* blanco suave (#f5f5f3): se lee bien sin cansar la vista */
+}
+
+.contact__text { max-width: 30rem; margin: 1.6rem 0 0; color: var(--muted); font-size: 1.15rem; }
+.contact__actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2rem; }
+
+/* Redes sociales: cuatro botones cuadrados en una fila, de izquierda a derecha, debajo de "Escríbeme" */
+.social { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.social__link {
+  display: grid;
+  place-items: center;
+  width: 3.25rem; height: 3.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+}
+.social__ico { width: 1.4rem; height: 1.4rem; }
+@media (hover: hover) {
+  .social__link:hover { background: var(--ink); border-color: var(--ink); color: var(--black); transform: translateY(-3px); }
+}
+
+.contact__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.contact__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "label go" "value go";
+  align-items: center;
+  column-gap: 1rem;
+  padding: 1.05rem 0.3rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: background 0.25s, padding 0.25s;
+}
+.contact__label { grid-area: label; color: var(--muted); font-size: 0.88rem; }
+.contact__value {
+  grid-area: value;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.contact__go { grid-area: go; width: 1.4rem; height: 1.4rem; color: var(--muted); transition: transform 0.25s, color 0.25s; }
+.contact__row:hover { background: rgba(255, 255, 255, 0.04); padding-inline: 0.9rem; }
+.contact__row:hover .contact__go { color: var(--ice); transform: translate(3px, -3px); }
+
+/* ---------- 14. Pie de página ---------- */
+.footer {
+  padding: 3rem 1.25rem 4rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+.footer__mark { width: 30px; height: 30px; margin: 0 auto 1rem; }
+.footer p { margin: 0 0 0.25rem; }
+
+/* ---------- 15. Tablet y celular ---------- */
+@media (max-width: 1000px) {
+  .soft { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 880px) {
+  /* Menú: pasa a ser una pantalla completa que se abre con el botón */
+  .menu-toggle { display: block; }
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: none;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 1.5rem;
+    padding: calc(var(--header-h) + 2rem) 1.5rem 2rem;
+    background: #0b0d10;
+    overflow-y: auto;
+  }
+  .site-header[data-open="true"] .nav { display: grid; }
+  .nav__list { flex-direction: column; justify-content: flex-start; gap: 0.5rem; }
+  .nav a {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .split { grid-template-columns: 1fr; }
+
+  /* Hero: el texto va arriba y la tarjeta abajo, todo centrado */
+  .hero__inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero__text { text-align: center; }
+  .hero__mark { margin-inline: auto; }
+  .hero__lead { margin-inline: auto; }
+  .hero__actions { justify-content: center; }
+  .hero__name { font-size: clamp(3rem, 14vw, 6rem); }
+  /* En celular el cordón es corto y se desvanece hacia arriba, para no cruzar el texto */
+  .badge-scene { padding-top: 5.5rem; transform-origin: 50% 0; }
+  .lanyard {
+    bottom: calc(100% - 5.9rem - var(--seal));
+    height: 5.5rem;
+    -webkit-mask-image: linear-gradient(to top, #000 55%, transparent);
+            mask-image: linear-gradient(to top, #000 55%, transparent);
+  }
+
+  /* Línea de tiempo: una sola columna; los rombos y la línea pasan al borde izquierdo */
+  .tl { grid-template-columns: 1.75rem 1fr; }
+  .tl::before { grid-column: 1; justify-self: start; }
+  .tl:not(:last-child)::after { left: 5px; }   /* centro del rombo: 11px / 2 = 5.5px */
+  .tl:nth-child(odd) .tl__body,
+  .tl:nth-child(even) .tl__body { grid-column: 2; text-align: left; }
+  .tl:nth-child(odd) .tl__body p:last-child { margin-left: 0; }
+
+  .projects { grid-template-columns: 1fr; }
+
+  .about { grid-template-columns: 1fr; }
+  .folder { padding-bottom: 11rem; perspective: 7000px; }   /* en celular el borde superior se ensancha menos, para no desbordar la pantalla */
+  .stack { grid-template-columns: 1fr; }
+  .langs { grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .sports { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .soft { grid-template-columns: 1fr; }
+  /* En celular los botones pasan a una fila arriba del visor */
+  .viewer { grid-template-columns: 1fr; gap: 1rem; }
+  .viewer__tabs { flex-direction: row; justify-content: center; gap: 1rem; }
+  .viewer__stage { min-height: 19rem; padding: 1rem; }
+  .dev--phone .dev__screen img, .dev--tablet .dev__screen img { height: 15rem; }
+  .project { padding-inline: 1.25rem; }
+  .hero__last { -webkit-text-stroke-width: 1px; }
+}
+
+/* ---------- 16. Si la persona prefiere menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .draw { animation: none; stroke-dashoffset: 0; }
+  .hero__first, .hero__last,
+  .hero__role, .hero__lead, .hero__actions { animation: none; }
+  .badge-scene { animation: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- 17. Página 404 (404.html) ---------- */
+.nf {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+.nf__mark { width: 64px; height: 64px; color: var(--ice); }
+.nf__title { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: clamp(5rem, 22vw, 10rem); line-height: 0.9; }
+.nf__text { margin: 0 0 1rem; color: var(--muted); font-size: 1.15rem; }

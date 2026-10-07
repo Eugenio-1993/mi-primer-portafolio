@@ -1,0 +1,30 @@
+# Configuración de Netlify para este portafolio.
+# Es un sitio estático (HTML, CSS y JS puros): no hay compilación, solo un reemplazo de texto.
+
+[build]
+  publish = "."
+  # SEO: en index.html, robots.txt y sitemap.xml la dirección del sitio está escrita como __SITE_URL__.
+  # Netlify guarda la dirección real en la variable URL y este comando la pone en su lugar al publicar.
+  command = '[ -n "$URL" ] && sed -i "s|__SITE_URL__|${URL%/}|g" index.html robots.txt sitemap.xml || true'
+
+# Cabeceras de seguridad para todas las páginas
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    # Solo se permite lo que está dentro del propio sitio: nada de scripts ni estilos externos.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+# Archivos que casi nunca cambian: el navegador los guarda un año y la página carga más rápido la segunda vez
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
